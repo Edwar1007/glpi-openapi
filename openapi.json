@@ -1,0 +1,61 @@
+
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GLPI Inventario Render",
+    "version": "1.0.0",
+    "description": "API para consultar equipos desde GLPI en Render"
+  },
+  "servers": [
+    {
+      "url": "https://glpi-jntn.onrender.com/inventario"
+    }
+  ],
+  "paths": {
+    "/todos-equipos": {
+      "get": {
+        "summary": "Listar todos los equipos",
+        "responses": {
+          "200": {
+            "description": "Lista de equipos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "equipos": {
+                      "type": "array",
+                      "items": { "type": "object" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buscar-por-usuario": {
+      "get": {
+        "summary": "Buscar equipos por usuario",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Nombre completo del usuario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Equipos asignados al usuario"
+          }
+        }
+      }
+    }
+  }
+}
