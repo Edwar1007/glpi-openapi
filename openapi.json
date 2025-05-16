@@ -1,6 +1,5 @@
-
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "GLPI Inventario Render",
     "version": "1.0.0",
@@ -15,6 +14,7 @@
     "/todos-equipos": {
       "get": {
         "summary": "Listar todos los equipos",
+        "operationId": "listarEquipos",
         "responses": {
           "200": {
             "description": "Lista de equipos",
@@ -39,6 +39,7 @@
     "/buscar-por-usuario": {
       "get": {
         "summary": "Buscar equipos por usuario",
+        "operationId": "buscarPorUsuario",
         "parameters": [
           {
             "name": "usuario",
@@ -52,7 +53,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Equipos asignados al usuario"
+            "description": "Equipos asignados al usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "equipos": {
+                      "type": "array",
+                      "items": { "type": "object" }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
